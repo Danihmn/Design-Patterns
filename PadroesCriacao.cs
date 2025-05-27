@@ -20,4 +20,48 @@ namespace PadroesCriacao
             return instancia; // Se já houver instância, retorna ela
         }
     }
+
+    public interface ModeloProduto
+    {
+        void ExibirInfo(); // Método a ser implementado
+    }
+
+    // Classe implementadora do produto 1
+    public class Produto1 : ModeloProduto
+    {
+        public void ExibirInfo()
+        {
+            Console.WriteLine("Produto 1");
+        }
+    }
+
+    // Classe implementadora do produto 2
+    public class Produto2 : ModeloProduto
+    {
+        public void ExibirInfo()
+        {
+            Console.WriteLine("Produto 2");
+        }
+    }
+
+    public interface FabricaProduto
+    {
+        ModeloProduto CriarProduto(); // Método a ser implementado
+    }
+
+    public class FabricaProduto1 : FabricaProduto
+    {
+        public ModeloProduto CriarProduto()
+        {
+            return new Produto1(); // Retorna novo produto 1 da interface
+        }
+    }
+
+    public class FabricaProduto2 : FabricaProduto
+    {
+        public ModeloProduto CriarProduto()
+        {
+            return new Produto2(); // Retorna novo produto 2 da interface
+        }
+    }
 }

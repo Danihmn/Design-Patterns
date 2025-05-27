@@ -15,6 +15,14 @@ namespace DesignPatterns
             retornará o valor do método como a própria instância já criada*/
 
             Console.WriteLine(obj1 == obj2); // True
+
+            FabricaProduto fabrica = new FabricaProduto1();
+            ModeloProduto modelo = fabrica.CriarProduto();
+            modelo.ExibirInfo(); // Exibindo o produto 1
+
+            fabrica = new FabricaProduto2();
+            modelo = fabrica.CriarProduto();
+            modelo.ExibirInfo(); // Exibindo o produto 2
         }
     }
 }
