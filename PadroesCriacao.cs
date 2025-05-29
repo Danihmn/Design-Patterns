@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace PadroesCriacao
 {
     // Singleton----------------------------------------------------
@@ -151,79 +153,70 @@ namespace PadroesCriacao
     // Builder----------------------------------------------------
     public class Carro
     {
-        // Atribuições de um carro
-        public string motor { get; set; }
-        public int numeroRodas { get; set; }
-        public string cor { get; set; }
+        public string Modelo { get; set; }
+        public string Motor { get; set; }
+        public string Cor { get; set; }
 
-        // Método que retorna a string final
-        public string ParaString()
+        public void Exibir()
         {
-            return $"Carro com motor: {motor}, {numeroRodas} rodas e cor {cor}";
+            Console.WriteLine("Novo carro construído\n");
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("Modelo: " + Modelo);
+            stringBuilder.AppendLine("Motor: " + Motor);
+            stringBuilder.AppendLine("Cor: " + Cor);
+
+            Console.WriteLine(stringBuilder);
         }
     }
 
-    // Define o que será feito
-    public interface InterfaceCarroBuilder
+    public interface InterfaceConstrutorCarro
     {
-        void DefinirMotor(string motor);
-        void DefinirRodas(int rodas);
-        void DefinirCor(string cor);
-
-        Carro ObterResultado(); // Retorna o carro construído
+        void ConstruirModelo();
+        void ConstruirMotor();
+        void ConstruirCor();
+        Carro ObterCarroConstruido();
     }
 
-    class ConstrutorDeCarro : InterfaceCarroBuilder
+    public class ConstrutorCarroEsportivo : InterfaceConstrutorCarro
     {
-        // Instanciando a classe para obter as variáveis
-        private Carro _carro = new Carro(); // Produto a ser construído
+        Carro _carro = new Carro();
 
-        public void DefinirMotor(string motor)
+        public void ConstruirModelo()
         {
-            _carro.motor = motor;
+            _carro.Modelo = "Chevrolet Camaro";
         }
 
-        public void DefinirRodas(int rodas)
+        public void ConstruirMotor()
         {
-            _carro.numeroRodas = rodas;
+            _carro.Motor = "V8";
         }
 
-        public void DefinirCor(string cor)
+        public void ConstruirCor()
         {
-            _carro.cor = cor;
+            _carro.Cor = "Amarelo";
         }
 
-        public Carro ObterResultado()
+        public Carro ObterCarroConstruido()
         {
-            Carro resultado = _carro;
-            _carro = new Carro(); // Garante que o próximo carro será novo
-            return resultado;
+            return _carro; // Retornando o carro construído
         }
     }
 
-    // Gerenciador de construções
-    public class DiretorCarro
+    public class Diretor
     {
-        // Definindo que o _builder apenas pode ser atribuído uma vez com o readonly, é uma constante
-        private readonly InterfaceCarroBuilder _builder;
+        readonly InterfaceConstrutorCarro _builder;
 
-        public DiretorCarro(InterfaceCarroBuilder builder)
+        public Diretor(InterfaceConstrutorCarro builder)
         {
             _builder = builder;
         }
 
-        public void CarroEsportivo()
+        public void ConstruirCarro()
         {
-            _builder.DefinirMotor("V12");
-            _builder.DefinirRodas(4);
-            _builder.DefinirCor("Branco");
-        }
-
-        public void CarroRally()
-        {
-            _builder.DefinirMotor("V8");
-            _builder.DefinirRodas(4);
-            _builder.DefinirCor("Azul");
+            _builder.ConstruirModelo();
+            _builder.ConstruirMotor();
+            _builder.ConstruirCor();
         }
     }
 }

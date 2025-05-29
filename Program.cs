@@ -42,17 +42,12 @@ namespace DesignPatterns
             produtoB2.ExibirInfo();
 
             // Builder----------------------------------------------------
-            InterfaceCarroBuilder criador = new ConstrutorDeCarro();
-            DiretorCarro diretor = new DiretorCarro(criador);
+            InterfaceConstrutorCarro builder = new ConstrutorCarroEsportivo();
+            Diretor diretor = new Diretor(builder);
+            diretor.ConstruirCarro(); // Manda construir o carro
 
-            diretor.CarroEsportivo();
-            diretor.CarroRally();
-
-            Carro carroEsportivo = criador.ObterResultado();
-            carroEsportivo.ParaString();
-
-            Carro carroDeRally = criador.ObterResultado();
-            carroDeRally.ParaString();
+            Carro carro = builder.ObterCarroConstruido(); // Define o carro já construído na variável carro
+            carro.Exibir();
         }
     }
 }
