@@ -6,6 +6,7 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            // Singleton----------------------------------------------------
             Singleton obj1 = Singleton.Instanciar();
             Singleton obj2 = Singleton.Instanciar();
 
@@ -16,6 +17,7 @@ namespace DesignPatterns
 
             Console.WriteLine(obj1 == obj2); // True
 
+            // Factory Method----------------------------------------------------
             FabricaProduto fabrica = new FabricaProduto1();
             ModeloProduto modelo = fabrica.CriarProduto();
             modelo.ExibirInfo(); // Exibindo o produto 1
@@ -23,6 +25,34 @@ namespace DesignPatterns
             fabrica = new FabricaProduto2();
             modelo = fabrica.CriarProduto();
             modelo.ExibirInfo(); // Exibindo o produto 2
+
+            // Abstract Factory----------------------------------------------------
+            IFabricaAbstrata fabricaAbstrata = new Fabrica1();
+            IProdutoA produtoA1 = fabricaAbstrata.CriarProdutoA();
+            IProdutoB produtoB1 = fabricaAbstrata.CriarProdutoB();
+
+            produtoA1.ExibirInfo();
+            produtoB1.ExibirInfo();
+
+            IFabricaAbstrata fabricaAbstrata2 = new Fabrica2();
+            IProdutoA produtoA2 = fabricaAbstrata2.CriarProdutoA();
+            IProdutoB produtoB2 = fabricaAbstrata2.CriarProdutoB();
+
+            produtoA2.ExibirInfo();
+            produtoB2.ExibirInfo();
+
+            // Builder----------------------------------------------------
+            InterfaceCarroBuilder criador = new ConstrutorDeCarro();
+            DiretorCarro diretor = new DiretorCarro(criador);
+
+            diretor.CarroEsportivo();
+            diretor.CarroRally();
+
+            Carro carroEsportivo = criador.ObterResultado();
+            carroEsportivo.ParaString();
+
+            Carro carroDeRally = criador.ObterResultado();
+            carroDeRally.ParaString();
         }
     }
 }
