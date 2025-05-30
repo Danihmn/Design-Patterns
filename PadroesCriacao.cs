@@ -219,4 +219,35 @@ namespace PadroesCriacao
             _builder.ConstruirCor();
         }
     }
+
+    // Prototype----------------------------------------------------
+    abstract class Prototype
+    {
+        public abstract Prototype Clone();
+    }
+
+    class PrototypeConcreto : Prototype
+    {
+        private string _atributo;
+
+        public PrototypeConcreto(string atributo)
+        {
+            _atributo = atributo;
+        }
+
+        public override Prototype Clone()
+        {
+            return new PrototypeConcreto(_atributo);
+        }
+
+        public void DefinirAtributo(string atributo)
+        {
+            _atributo = atributo;
+        }
+
+        public void ExibirAtributo()
+        {
+            Console.WriteLine($"Atributo: {_atributo}");
+        }
+    }
 }
