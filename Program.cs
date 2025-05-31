@@ -1,4 +1,5 @@
 ﻿using PadroesCriacao;
+using PadroesEstruturais;
 
 namespace DesignPatterns
 {
@@ -6,16 +7,26 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            // Padrões de criação
+            PadroesCriacao.PadraoSingleton(); // Singleton
+            PadroesCriacao.AbstractFactory(); // Abstract Factory
+            PadroesCriacao.Builder(); // Builder
+            PadroesCriacao.Prototype(); // Prototype
+
+            // Padrões estruturais
+            PadroesEstruturais.Adapter(); // Adapter
+        }
+    }
+
+    class PadroesCriacao
+    {
+        public static void PadraoSingleton()
+        {
             // Singleton----------------------------------------------------
             Console.WriteLine("Singleton----------------------------------------------------");
 
             Singleton obj1 = Singleton.Instanciar();
             Singleton obj2 = Singleton.Instanciar();
-
-            /*Essa forma de impedir que sejam instanciados diversos objetos permite que
-             independente de quantas instâncias forem feitas, sempre será a mesma, visto
-            que o método de instanciar na classe serve para criar se não houver, e se houver,
-            retornará o valor do método como a própria instância já criada*/
 
             Console.WriteLine(obj1 == obj2); // True
 
@@ -29,7 +40,24 @@ namespace DesignPatterns
             fabrica = new FabricaProduto2();
             modelo = fabrica.CriarProduto();
             modelo.ExibirInfo(); // Exibindo o produto 2
+        }
 
+        public static void FactoryMethod()
+        {
+            FabricaProduto fabrica = new FabricaProduto1(); // Criando a fabrica do produto 1
+
+            // Chamando o método de criar o produto 1
+            ModeloProduto produto1 = fabrica.CriarProduto();
+            produto1.ExibirInfo(); // Exibindo
+
+            // Chamando o método de criar o produto 1
+            fabrica = new FabricaProduto2();
+            ModeloProduto produto2 = fabrica.CriarProduto();
+            produto2.ExibirInfo(); // Exibindo
+        }
+
+        public static void AbstractFactory()
+        {
             // Abstract Factory----------------------------------------------------
             Console.WriteLine("Abstract Factory----------------------------------------------------");
 
@@ -46,7 +74,10 @@ namespace DesignPatterns
 
             produtoA2.ExibirInfo();
             produtoB2.ExibirInfo();
+        }
 
+        public static void Builder()
+        {
             // Builder----------------------------------------------------
             Console.WriteLine("Builder----------------------------------------------------");
 
@@ -56,7 +87,10 @@ namespace DesignPatterns
 
             Carro carro = builder.ObterCarroConstruido(); // Define o carro já construído na variável carro
             carro.Exibir();
+        }
 
+        public static void Prototype()
+        {
             // Prototype----------------------------------------------------
             Console.WriteLine("Prototype----------------------------------------------------");
 
@@ -69,6 +103,16 @@ namespace DesignPatterns
             // Exibindo os protótipos
             prototipo.ExibirAtributo();
             clone.ExibirAtributo();
+        }
+    }
+
+    class PadroesEstruturais
+    {
+        public static void Adapter()
+        {
+            // Instanciando novo adaptador, recebendo como parâmetro o dispositivo USB criado
+            InterfaceAdaptador_HDMI adaptador = new USBParaHDMI(new Dispositivo_USB());
+            adaptador.LigarHDMI(); // Exibindo
         }
     }
 }
