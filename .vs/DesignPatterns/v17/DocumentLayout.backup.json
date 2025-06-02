@@ -9,6 +9,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{E50C35EF-6821-4B4D-8DFA-237A985569D2}|DesignPatterns.csproj|c:\\users\\danie\\dev.net\\estudos\\designpatterns\\padroescriacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E50C35EF-6821-4B4D-8DFA-237A985569D2}|DesignPatterns.csproj|solutionrelative:padroescriacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E50C35EF-6821-4B4D-8DFA-237A985569D2}|DesignPatterns.csproj|c:\\users\\danie\\dev.net\\estudos\\designpatterns\\padroesestruturais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E50C35EF-6821-4B4D-8DFA-237A985569D2}|DesignPatterns.csproj|solutionrelative:padroesestruturais.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,24 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PadroesCriacao.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesCriacao.cs",
-              "RelativeDocumentMoniker": "PadroesCriacao.cs",
-              "ToolTip": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesCriacao.cs",
-              "RelativeToolTip": "PadroesCriacao.cs",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAewPwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T13:52:57.18Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -45,9 +36,35 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAQwEkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-24T13:40:23.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PadroesCriacao.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesCriacao.cs",
+              "RelativeDocumentMoniker": "PadroesCriacao.cs",
+              "ToolTip": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesCriacao.cs",
+              "RelativeToolTip": "PadroesCriacao.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwCIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T13:52:57.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PadroesEstruturais.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesEstruturais.cs",
+              "RelativeDocumentMoniker": "PadroesEstruturais.cs",
+              "ToolTip": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesEstruturais.cs",
+              "RelativeToolTip": "PadroesEstruturais.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T18:32:21.519Z",
               "EditorCaption": ""
             }
           ]

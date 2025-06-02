@@ -7,14 +7,18 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            // Padrões de criação
+            /*
+            Padrões de criação: 
+            
             PadroesCriacao.PadraoSingleton(); // Singleton
             PadroesCriacao.AbstractFactory(); // Abstract Factory
             PadroesCriacao.Builder(); // Builder
             PadroesCriacao.Prototype(); // Prototype
+            */
 
             // Padrões estruturais
             PadroesEstruturais.Adapter(); // Adapter
+            PadroesEstruturais.Bridge(); // Bridge
         }
     }
 
@@ -113,6 +117,21 @@ namespace DesignPatterns
             // Instanciando novo adaptador, recebendo como parâmetro o dispositivo USB criado
             InterfaceAdaptador_HDMI adaptador = new USBParaHDMI(new Dispositivo_USB());
             adaptador.LigarHDMI(); // Exibindo
+        }
+
+        public static void Bridge()
+        {
+            // Instância do método de criação do bolo pertencente da interface
+            InterfaceBolo bolo = new CriacaoBolo();
+
+            // Adicionando à classe de abstração a instância do método bolo
+            Abstracao adicaoIngrediente1 = new IngredienteAdicional1(bolo);
+
+            // Adicionando à classe de abstração a instância do método bolo
+            Abstracao adicaoIngrediente2 = new IngredienteAdicional2(bolo);
+
+            // Exibindo todos os ingredientes, tanto padrões quanto adicionais
+            Console.WriteLine(adicaoIngrediente2.FazerBolo());
         }
     }
 }
