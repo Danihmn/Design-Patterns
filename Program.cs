@@ -7,6 +7,8 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            Console.Clear();
+
             /*
             Padrões de criação: 
             
@@ -16,9 +18,13 @@ namespace DesignPatterns
             PadroesCriacao.Prototype(); // Prototype
             */
 
-            // Padrões estruturais
+            /*
+            Padrões estruturais
             PadroesEstruturais.Adapter(); // Adapter
             PadroesEstruturais.Bridge(); // Bridge
+            */
+
+            PadroesEstruturais.Composite(); // Composite
         }
     }
 
@@ -132,6 +138,30 @@ namespace DesignPatterns
 
             // Exibindo todos os ingredientes, tanto padrões quanto adicionais
             Console.WriteLine(adicaoIngrediente2.FazerBolo());
+        }
+
+        public static void Composite()
+        {
+            // Criando uma raiz que será a pai
+            ComponentesComFilhos raiz = new ComponentesComFilhos("Raiz");
+
+            // Adicionando interfaces filhas
+            raiz.Adicionar(new ComponentesFinais("Filho 1"));
+            raiz.Adicionar(new ComponentesFinais("Filho 2"));
+            raiz.Adicionar(new ComponentesFinais("Filho 3"));
+
+            // Criando outro componente que terá filhos
+            ComponentesComFilhos subRaiz = new ComponentesComFilhos("Sub Raiz");
+
+            // Adicionando interfaces filhas
+            subRaiz.Adicionar(new ComponentesFinais("Filho 1"));
+            subRaiz.Adicionar(new ComponentesFinais("Filho 2"));
+            subRaiz.Adicionar(new ComponentesFinais("Filho 3"));
+
+            // Adicionando na raiz principal a subRaiz que tem outros componentes filho
+            raiz.Adicionar(subRaiz);
+
+            raiz.Exibir(1); // Exibindo o resultado final da árvore
         }
     }
 }

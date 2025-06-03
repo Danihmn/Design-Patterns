@@ -102,4 +102,64 @@ namespace PadroesEstruturais
             return base.FazerBolo() + ", Gotas de chocolate";
         }
     }
+
+    // Composite----------------------------------------------------
+    interface IComponente // Todo o componente criado possuirá
+    {
+        // Exibindo no terminal
+        void Exibir(int profundidade); // O int profundidade será usado para ilustrar hierarquias
+    }
+
+    class ComponentesFinais : IComponente
+    {
+        private string nome; // Nome que cada componente possuirá
+
+        public ComponentesFinais(string nome)
+        {
+            this.nome = nome; // Atribuindo o valor da instância na variável
+        }
+
+        // Exibindo o valor final
+        public void Exibir(int profundidade)
+        {
+            // "-" repete na linha conforme o valor de profundidade,e no final exibe o nome
+            Console.WriteLine(new String('-', profundidade) + nome);
+        }
+    }
+
+    // Componentes que possuirão filhos
+    class ComponentesComFilhos : IComponente
+    {
+        public string nome; // Nome que cada componente possuirá
+        public List<IComponente> filhos = new List<IComponente>(); // Lista onde serão adicionados os componentes filhos
+
+        public ComponentesComFilhos(string nome)
+        {
+            this.nome = nome; // Atribuindo o valor da instância na variável
+        }
+
+        public void Adicionar(IComponente filho)
+        {
+            filhos.Add(filho); // Adiciona outras interfaces filho na lista
+        }
+
+        public void Remover(IComponente filho)
+        {
+            filhos.Remove(filho); // Remove da lista de interfaces
+        }
+
+        // Exibindo no terminal
+        public void Exibir(int profundidade)
+        {
+            // "-" repete na linha conforme o valor de profundidade,e no final exibe o nome
+            Console.WriteLine(new String('-', profundidade) + nome);
+
+            // Percorrendo a lista de interfaces filho para exibir as hierarquias
+            foreach (var filho in filhos)
+            {
+                // Chama o método de exibir de cada interface encontrada
+                filho.Exibir(profundidade + 3); // Adiciona 3 em profundidade a cada hierarquia para melhor compreensão de hierarquias
+            }
+        }
+    }
 }
