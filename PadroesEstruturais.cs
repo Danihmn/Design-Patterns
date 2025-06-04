@@ -162,4 +162,75 @@ namespace PadroesEstruturais
             }
         }
     }
+
+    // Decorator----------------------------------------------------
+    interface InterfaceCafe
+    {
+        // Métodos padrão que todo tipo de café terá
+        string ExibirDescricao();
+        double ExibirValor();
+    }
+
+    // Implementador primário da interface, serão criados novos cafés a partir dele
+    class CafeSimples : InterfaceCafe
+    {
+        // Implementando os métodos básicos
+        public string ExibirDescricao()
+        {
+            // Exibindo o nome
+            return "Café";
+        }
+
+        public double ExibirValor()
+        {
+            // Exibindo o valor
+            return 1.50;
+        }
+    }
+
+    // O decorador é o que permitirá com que outros cafés sejam criados a partir do simples
+    class DecoradorCafe : InterfaceCafe
+    {
+        // Armazenando uma interface em uma variável
+        protected InterfaceCafe cafe;
+
+        public DecoradorCafe(InterfaceCafe cafe)
+        {
+            // Atribue o valor da instância à variável
+            this.cafe = cafe;
+        }
+
+        // Os métodos virtuais serão reescritos, é onde serão feitos os novos cafés a partir do simples
+        public virtual string ExibirDescricao()
+        {
+            // Retorna o método de exibir a descrição da variável que receberá a interface na instância
+            return cafe.ExibirDescricao();
+        }
+
+        public virtual double ExibirValor()
+        {
+            // Retorna o método de exibir a descrição da variável que receberá a interface na instância
+            return cafe.ExibirValor();
+        }
+    }
+
+    // Novo café que será feito a partir do simples
+    class CafeComLeite : DecoradorCafe
+    {
+        // Herda o construtor da classe primitiva
+        public CafeComLeite(InterfaceCafe cafe) : base(cafe) { }
+
+        // Reescrevendo os métodos
+        public override string ExibirDescricao()
+        {
+            // Alterando a descrição
+            return cafe.ExibirDescricao() + " com leite";
+        }
+
+        public override double ExibirValor()
+        {
+            // Alterando o valor
+            return cafe.ExibirValor() + 1.20;
+        }
+    }
 }

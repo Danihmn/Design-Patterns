@@ -22,9 +22,10 @@ namespace DesignPatterns
             Padrões estruturais
             PadroesEstruturais.Adapter(); // Adapter
             PadroesEstruturais.Bridge(); // Bridge
+            PadroesEstruturais.Composite(); // Composite
             */
 
-            PadroesEstruturais.Composite(); // Composite
+            PadroesEstruturais.Decorator();
         }
     }
 
@@ -162,6 +163,23 @@ namespace DesignPatterns
             raiz.Adicionar(subRaiz);
 
             raiz.Exibir(1); // Exibindo o resultado final da árvore
+        }
+
+        public static void Decorator()
+        {
+            // Criando novo café simples
+            InterfaceCafe cafe = new CafeSimples();
+
+            // Exibindo os componentes do café simples
+            Console.WriteLine(cafe.ExibirDescricao());
+            Console.WriteLine(cafe.ExibirValor().ToString("C")); // Formata em reais
+
+            // Definindo que agora a interface cafe será cafe com leite
+            cafe = new CafeComLeite(cafe);
+
+            // Exibindo os valores após ele ter sido modificado
+            Console.WriteLine(cafe.ExibirDescricao());
+            Console.WriteLine(cafe.ExibirValor().ToString("C")); // Formata em reais
         }
     }
 }
