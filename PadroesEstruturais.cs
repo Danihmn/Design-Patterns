@@ -233,4 +233,83 @@ namespace PadroesEstruturais
             return cafe.ExibirValor() + 1.20;
         }
     }
+
+    // Facade----------------------------------------------------
+    class Luzes
+    {
+        // Método de ligar
+        public void Ligar()
+        {
+            Console.WriteLine("Luzes ligadas");
+        }
+
+        // Método de desligar
+        public void Desligar()
+        {
+            Console.WriteLine("Luzes desligadas");
+        }
+    }
+
+    class ArCondicionado
+    {
+        // Método de ligar
+        public void Ligar()
+        {
+            Console.WriteLine("Ar condicionado ligadas");
+        }
+
+        // Método de desligar
+        public void Desligar()
+        {
+            Console.WriteLine("Ar condicionado desligadas");
+        }
+    }
+
+    class Som
+    {
+        // Método de ligar
+        public void Ligar()
+        {
+            Console.WriteLine("Som ligadas");
+        }
+
+        // Método de desligar
+        public void Desligar()
+        {
+            Console.WriteLine("Som desligadas");
+        }
+    }
+
+    // Classe que inicializa todos os eletrônicos para ligar e desligar eles
+    class Automacao
+    {
+        // Readonly permite que o valor seja atribuído depois da declaração, porém também só pode ser atribuído uma só vez
+        private readonly Luzes luzes;
+        private readonly ArCondicionado arCondicionado;
+        private readonly Som som;
+
+        public Automacao()
+        {
+            // Inicializa todas as instâncias
+            luzes = new Luzes();
+            arCondicionado = new ArCondicionado();
+            som = new Som();
+        }
+
+        // Método que liga tudo
+        public void LigarTudo()
+        {
+            luzes.Ligar();
+            arCondicionado.Ligar();
+            som.Ligar();
+        }
+
+        // Método que desliga tudo
+        public void DesligarTudo()
+        {
+            luzes.Desligar();
+            arCondicionado.Desligar();
+            som.Desligar();
+        }
+    }
 }

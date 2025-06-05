@@ -23,9 +23,10 @@ namespace DesignPatterns
             PadroesEstruturais.Adapter(); // Adapter
             PadroesEstruturais.Bridge(); // Bridge
             PadroesEstruturais.Composite(); // Composite
+            PadroesEstruturais.Decorator(); // Decorator
             */
 
-            PadroesEstruturais.Decorator();
+            PadroesEstruturais.Facade(); // Facade
         }
     }
 
@@ -180,6 +181,16 @@ namespace DesignPatterns
             // Exibindo os valores após ele ter sido modificado
             Console.WriteLine(cafe.ExibirDescricao());
             Console.WriteLine(cafe.ExibirValor().ToString("C")); // Formata em reais
+        }
+
+        public static void Facade()
+        {
+            // Instancia a classe que liga e desliga tudo
+            Automacao automacao = new Automacao();
+
+            // Chamando os métodos
+            automacao.LigarTudo();
+            automacao.DesligarTudo();
         }
     }
 }
