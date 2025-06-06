@@ -371,4 +371,45 @@ namespace PadroesEstruturais
             }
         }
     }
+
+    // Proxy----------------------------------------------------
+    interface InterfaceObjetivo
+    {
+        // Solicitar conexão com o banco de dados
+        void Solicitar();
+    }
+
+    // Classe que cria e acessa a conexão com o banco de dados
+    class ObjetivoReal : InterfaceObjetivo
+    {
+        // Realiza a operação de conexão com o banco
+        public ObjetivoReal() // Conexão é criada por um construtor logo na instância
+        {
+            // Operação cara
+            Console.WriteLine("Conexão ao banco");
+        }
+
+        // Método que acessa de fato o banco de dados
+        public void Solicitar() // Acesso ao banco deve ser solicitado separadamente
+        {
+            // Acessa o banco de dados
+            Console.WriteLine("Objetivo real: Solicitação");
+        }
+    }
+
+    class VirtualProxy : InterfaceObjetivo
+    {
+        // Armazena a classe que cria conexão com o banco e acessa o banco
+        private ObjetivoReal _real;
+
+        public void Solicitar()
+        {
+            // Se ainda não houver instância para criar a conexão com o banco de dados
+            if (_real == null)
+                _real = new ObjetivoReal(); // Cria conexão com o banco de dados
+
+            // Se já houver objeto instanciado com a conexão com o banco de dados
+            _real.Solicitar(); // Acessa o banco
+        }
+    }
 }

@@ -25,9 +25,10 @@ namespace DesignPatterns
             PadroesEstruturais.Composite(); // Composite
             PadroesEstruturais.Decorator(); // Decorator
             PadroesEstruturais.Facade(); // Facade
+            PadroesEstruturais.FlyWeight(); // FlyWeight
             */
 
-            PadroesEstruturais.FlyWeight(); // FlyWeight
+            PadroesEstruturais.VirtualProxy();
         }
     }
 
@@ -213,6 +214,16 @@ namespace DesignPatterns
 
             // Exibindo os elementos criados
             fabrica.Listar();
+        }
+
+        public static void VirtualProxy()
+        {
+            // Cria um Proxy para monitorar a conexão com o banco
+            InterfaceObjetivo proxy = new VirtualProxy(); // Nesse momento, exibe a conexão com o banco de dados
+
+            // Chama o método de acesso ao banco
+            proxy.Solicitar();
+            proxy.Solicitar();
         }
     }
 }
