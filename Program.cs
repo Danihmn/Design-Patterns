@@ -24,9 +24,10 @@ namespace DesignPatterns
             PadroesEstruturais.Bridge(); // Bridge
             PadroesEstruturais.Composite(); // Composite
             PadroesEstruturais.Decorator(); // Decorator
+            PadroesEstruturais.Facade(); // Facade
             */
 
-            PadroesEstruturais.Facade(); // Facade
+            PadroesEstruturais.FlyWeight(); // FlyWeight
         }
     }
 
@@ -191,6 +192,27 @@ namespace DesignPatterns
             // Chamando os métodos
             automacao.LigarTudo();
             automacao.DesligarTudo();
+        }
+
+        public static void FlyWeight()
+        {
+            // Criando nova fábrica de impressões, que conterá
+            FabricaDeImpressao fabrica = new FabricaDeImpressao();
+
+            // Criando o elemento de impressão 1
+            var Impressao1 = fabrica.ObterElementos("A");
+            Impressao1.ImprimirElemento(1);
+
+            // Criando o elemento de impressão 2
+            var Impressao2 = fabrica.ObterElementos("B");
+            Impressao2.ImprimirElemento(2);
+
+            // Criando o elemento de impressão 3
+            var Impressao3 = fabrica.ObterElementos("A");
+            Impressao3.ImprimirElemento(3);
+
+            // Exibindo os elementos criados
+            fabrica.Listar();
         }
     }
 }

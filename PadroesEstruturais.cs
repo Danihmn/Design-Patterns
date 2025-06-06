@@ -312,4 +312,63 @@ namespace PadroesEstruturais
             som.Desligar();
         }
     }
+
+    // Flyweight----------------------------------------------------
+    interface InterfaceImprimirElementos // Imprimindo elementos gráficos em papéis
+    {
+        // Cada elemento tem sua posição no papel
+        void ImprimirElemento(int posicaoElemento);
+    }
+
+    class NovoElemento : InterfaceImprimirElementos
+    {
+        private string Elemento; // String que irá armazenar o elemento
+
+        public NovoElemento(string posicaoElemento)
+        {
+            // Atribue o valor da instância no elemento
+            Elemento = posicaoElemento;
+        }
+
+        // Exibindo
+        public void ImprimirElemento(int posicaoElemento)
+        {
+            // Exibe qual o elemento e em qual posição ele está na folha
+            Console.WriteLine($"Elemento: {Elemento} na posição {posicaoElemento}");
+        }
+    }
+
+    // Irá gerenciar o que irá imprimir
+    class FabricaDeImpressao
+    {
+        // Dicionário que irá armazenar a posição dos elementos impressos
+        private Dictionary<string, InterfaceImprimirElementos> Elementos = new Dictionary<string, InterfaceImprimirElementos>();
+
+        // Método responsável por verificar se há ou não elementos já criados
+        public InterfaceImprimirElementos ObterElementos(string chave)
+        {
+            // Caso no dicionário não contenha o elemento com a chave X
+            if (!Elementos.ContainsKey(chave))
+            {
+                // Cria um novo elemento com a chave X
+                Elementos[chave] = new NovoElemento(chave);
+            }
+
+            // Caso já o houver, retorna ele
+            return Elementos[chave];
+        }
+
+        public void Listar()
+        {
+            // Exibe a quantidade de elementos diferentes impressos
+            Console.WriteLine(Elementos.Count() + " Elementos impressos");
+
+            // Percorre o dicionário dos elementos
+            foreach (var elemento in Elementos)
+            {
+                // Exibe os elementos
+                Console.WriteLine(elemento.Key);
+            }
+        }
+    }
 }
