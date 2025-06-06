@@ -1,4 +1,5 @@
-﻿using PadroesCriacao;
+﻿using PadroesComportamentais;
+using PadroesCriacao;
 using PadroesEstruturais;
 
 namespace DesignPatterns
@@ -26,9 +27,10 @@ namespace DesignPatterns
             PadroesEstruturais.Decorator(); // Decorator
             PadroesEstruturais.Facade(); // Facade
             PadroesEstruturais.FlyWeight(); // FlyWeight
+            PadroesEstruturais.VirtualProxy(); // Virtual Proxy
             */
 
-            PadroesEstruturais.VirtualProxy();
+            PadroesComportamentais.Iterator(); // Iterator
         }
     }
 
@@ -224,6 +226,37 @@ namespace DesignPatterns
             // Chama o método de acesso ao banco
             proxy.Solicitar();
             proxy.Solicitar();
+        }
+    }
+
+    class PadroesComportamentais
+    {
+        public static void Iterator()
+        {
+            // Crian um novo objeto da classe Mochila
+            Mochila minhaMochila = new Mochila();
+
+            // Adiciona alguns lápis
+            minhaMochila.AdicionarLapis("Vermelho");
+            minhaMochila.AdicionarLapis("Azul");
+            minhaMochila.AdicionarLapis("Verde");
+            minhaMochila.AdicionarLapis("Rosa");
+            minhaMochila.AdicionarLapis("Marrom");
+            minhaMochila.AdicionarLapis("Preto");
+            minhaMochila.AdicionarLapis("Dourado");
+
+            // Chama o método do iterador, para percorrer a lista de lápis
+            var iterador = minhaMochila.CriarIterador();
+
+            Console.WriteLine("Lápis que estão na mochila: ");
+
+            // enquanto ela não for totalmente percorrida
+            while (iterador.TemProximo())
+            {
+                // Armazena na string o próximo índice da lista
+                string lapis = iterador.Proximo();
+                Console.WriteLine($"Peguei o lápis: {lapis}");
+            }
         }
     }
 }
