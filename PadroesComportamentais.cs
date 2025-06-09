@@ -1,7 +1,7 @@
 namespace PadroesComportamentais
 {
     // Iterator----------------------------------------------------
-    #region Interface do iterador - Definir quais os métodos para percorrer a lista
+    #region Interface do iterador - Definir quais os metodos para percorrer a lista
     public interface InterfaceIterador<T>
     {
         // O Iterador precisa ter um método para verificar se há um próximo elemento a ser percorrido
@@ -12,7 +12,7 @@ namespace PadroesComportamentais
     }
     #endregion
 
-    #region Mochila (coleção) - Obter a lista de lápis, o método de adicionar à lista novos lápis, retornar a lista e chamar o percorredor da lista
+    #region Mochila (colecao) - Obter a lista de lapis, o método de adicionar a lista novos lapis, retornar a lista e chamar o percorredor da lista
     public class Mochila
     {
         // Lista que armazenará os lápis
@@ -38,7 +38,7 @@ namespace PadroesComportamentais
     }
     #endregion
 
-    #region Iterador da mochila - Verifica se a classe foi percorrida, se não, percorrer
+    #region Iterador da mochila - Verifica se a classe foi percorrida, se nao, percorrer
     // Incrementa a interface para possuir os métodos de verificar e percorrer a lista
     class MochilaIterador : InterfaceIterador<string>
     {
@@ -64,6 +64,68 @@ namespace PadroesComportamentais
         {
             // Retorna o índice da lista de lápis correspondente ao contador 
             return mochila.ObterLapis()[posicao++];
+        }
+    }
+    #endregion
+
+    // Observer----------------------------------------------------
+    #region Interface que cada classe de assinante herdará
+    interface InterfaceAssitantes
+    {
+        void Atualizar(object dados);
+    }
+    #endregion
+
+    #region Classe do jornal
+    class Jornal // Quando atualizado, todos os assinantes são notificados
+    {
+        // Armazena as classes de assinantes assinantes
+        private List<InterfaceAssitantes> assinantes = new List<InterfaceAssitantes>();
+
+        public void Adicionar(InterfaceAssitantes assinante)
+        {
+            assinantes.Add(assinante);
+        }
+
+        public void Remover(InterfaceAssitantes assinante)
+        {
+            assinantes.Remove(assinante);
+        }
+
+        public void Notificar(object dados)
+        {
+            // Percorre a lista
+            foreach (var assinante in assinantes)
+            {
+                // Para cada assinante, chama sua função de atualizar
+                assinante.Atualizar(dados);
+            }
+        }
+    }
+    #endregion
+
+    #region Assinantes
+    class Assinante1 : InterfaceAssitantes
+    {
+        public void Atualizar(object dados)
+        {
+            Console.WriteLine("Atualizações do assinante 1: " + dados);
+        }
+    }
+
+    class Assinante2 : InterfaceAssitantes
+    {
+        public void Atualizar(object dados)
+        {
+            Console.WriteLine("Atualizações do assinante 2: " + dados);
+        }
+    }
+
+    class Assinante3 : InterfaceAssitantes
+    {
+        public void Atualizar(object dados)
+        {
+            Console.WriteLine("Atualizações do assinante 3: " + dados);
         }
     }
     #endregion

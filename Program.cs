@@ -28,9 +28,10 @@ namespace DesignPatterns
             PadroesEstruturais.Facade(); // Facade
             PadroesEstruturais.FlyWeight(); // FlyWeight
             PadroesEstruturais.VirtualProxy(); // Virtual Proxy
+            PadroesComportamentais.Iterator(); // Iterator
             */
 
-            PadroesComportamentais.Iterator(); // Iterator
+            PadroesComportamentais.Observer(); // Observer
         }
     }
 
@@ -257,6 +258,22 @@ namespace DesignPatterns
                 string lapis = iterador.Proximo();
                 Console.WriteLine($"Peguei o lápis: {lapis}");
             }
+        }
+
+        public static void Observer()
+        {
+            Jornal jornal = new Jornal(); // Possui os assinantes o observando
+
+            // Cria os assinantes
+            Assinante1 assinante1 = new Assinante1();
+            Assinante2 assinante2 = new Assinante2();
+
+            // Os adiciona na lista
+            jornal.Adicionar(assinante1);
+            jornal.Adicionar(assinante2);
+
+            // Fez alteração no jornal
+            jornal.Notificar("Nova matéria");
         }
     }
 }
