@@ -29,9 +29,10 @@ namespace DesignPatterns
             PadroesEstruturais.FlyWeight(); // FlyWeight
             PadroesEstruturais.VirtualProxy(); // Virtual Proxy
             PadroesComportamentais.Iterator(); // Iterator
+            PadroesComportamentais.Observer(); // Observer
             */
 
-            PadroesComportamentais.Observer(); // Observer
+            PadroesComportamentais.Strategy();
         }
     }
 
@@ -274,6 +275,21 @@ namespace DesignPatterns
 
             // Fez alteração no jornal
             jornal.Notificar("Nova matéria");
+        }
+
+        public static void Strategy()
+        {
+            // Cria nova instância já com a primeira estratégia de combate
+            Contexto contexto = new Contexto(new EstrategiaEspada());
+            contexto.ExecutarEstrategia();
+
+            // Trocou de fase
+            contexto.DefinirEstrategia(new EstrategiaEspingarda());
+            contexto.ExecutarEstrategia();
+
+            // Trocou de fase
+            contexto.DefinirEstrategia(new EstrategiaCanhao());
+            contexto.ExecutarEstrategia();
         }
     }
 }

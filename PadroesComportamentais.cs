@@ -129,4 +129,62 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Strategy----------------------------------------------------
+    #region Interface das estratégias de ataque
+    interface Estrategia
+    {
+        // Cada personagem terá alguma estratégia de ataque
+        void ExecutarAtaque();
+    }
+    #endregion
+
+    #region Estratégias implementadoras da interface
+    class EstrategiaEspada : Estrategia
+    {
+        public void ExecutarAtaque()
+        {
+            Console.WriteLine("Ataque com espada!");
+        }
+    }
+
+    class EstrategiaEspingarda : Estrategia
+    {
+        public void ExecutarAtaque()
+        {
+            Console.WriteLine("Ataque com espingarda!");
+        }
+    }
+
+    class EstrategiaCanhao : Estrategia
+    {
+        public void ExecutarAtaque()
+        {
+            Console.WriteLine("Ataque com canhão!");
+        }
+    }
+    #endregion
+
+    #region Local que define qual a estratégia usada
+    class Contexto
+    {
+        private Estrategia estrategia;
+
+        public Contexto(Estrategia estrategia)
+        {
+            this.estrategia = estrategia;
+        }
+
+        public void DefinirEstrategia(Estrategia estrategia)
+        {
+            // Insere na variável o valor da nova estratégia que for passada na instância
+            this.estrategia = estrategia;
+        }
+
+        public void ExecutarEstrategia()
+        {
+            this.estrategia.ExecutarAtaque();
+        }
+    }
+    #endregion
 }
