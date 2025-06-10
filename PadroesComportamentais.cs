@@ -187,4 +187,79 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Command----------------------------------------------------
+    #region Interface dos comandos
+    interface InterfaceComando
+    {
+        void Executar(); // Delega que haverá um comando a ser executado
+    }
+    #endregion
+
+    #region Class que tem a lógica de ligar e desligar a TV
+    class TV
+    {
+        public void Ligar()
+        {
+            Console.WriteLine("TV ligada");
+        }
+
+        public void Desligar()
+        {
+            Console.WriteLine("TV desligada");
+        }
+    }
+    #endregion
+
+    #region Comandos concretos para desligar e ligar a TV
+    class DesligarTV : InterfaceComando
+    {
+        private TV tv;
+
+        public DesligarTV(TV tv)
+        {
+            this.tv = tv;
+        }
+
+        public void Executar()
+        {
+            tv.Desligar();
+        }
+    }
+
+    class LigarTV : InterfaceComando
+    {
+        private TV tv;
+
+        public LigarTV(TV tv)
+        {
+            this.tv = tv;
+        }
+
+        public void Executar()
+        {
+            tv.Ligar();
+        }
+    }
+    #endregion
+
+    #region Classe do controle remoto
+    class ControleRemoto
+    {
+        // Onde serão inseridos os comandos
+        private Dictionary<string, InterfaceComando> comandos = new Dictionary<string, InterfaceComando>();
+
+        public void DefinirComando(string botao, InterfaceComando comando)
+        {
+            // Apenas atribui sem o método Add para que os valores possam ser substituídos
+            comandos[botao] = comando;
+        }
+
+        public void PressionarBotao(string botao)
+        {
+            if (comandos.ContainsKey(botao))
+                comandos[botao].Executar();
+        }
+    }
+    #endregion
 }

@@ -20,7 +20,8 @@ namespace DesignPatterns
             */
 
             /*
-            Padrões estruturais
+            Padrões estruturais:
+
             PadroesEstruturais.Adapter(); // Adapter
             PadroesEstruturais.Bridge(); // Bridge
             PadroesEstruturais.Composite(); // Composite
@@ -28,11 +29,17 @@ namespace DesignPatterns
             PadroesEstruturais.Facade(); // Facade
             PadroesEstruturais.FlyWeight(); // FlyWeight
             PadroesEstruturais.VirtualProxy(); // Virtual Proxy
-            PadroesComportamentais.Iterator(); // Iterator
-            PadroesComportamentais.Observer(); // Observer
             */
 
-            PadroesComportamentais.Strategy();
+            /*
+            Padrões comportamentais: 
+             
+            PadroesComportamentais.Iterator(); // Iterator
+            PadroesComportamentais.Observer(); // Observer
+            PadroesComportamentais.Strategy(); // Strategy
+            */
+
+            PadroesComportamentais.Command(); // Command
         }
     }
 
@@ -290,6 +297,24 @@ namespace DesignPatterns
             // Trocou de fase
             contexto.DefinirEstrategia(new EstrategiaCanhao());
             contexto.ExecutarEstrategia();
+        }
+
+        public static void Command()
+        {
+            TV tv = new TV(); // Intancia nova TV
+
+            // Instancia classes de desligar e ligar
+            InterfaceComando ligar = new LigarTV(tv);
+            InterfaceComando desligar = new DesligarTV(tv);
+
+            ControleRemoto controle = new ControleRemoto();
+
+            // Define os nomes dos botões como as chaves, e os valores são as instâncias das classes de ligar e desligar
+            controle.DefinirComando("Power On", ligar);
+            controle.DefinirComando("Power Off", desligar);
+
+            controle.PressionarBotao("Power On"); // TV ligada
+            controle.PressionarBotao("Power Off"); // TV desligada
         }
     }
 }
