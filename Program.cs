@@ -37,9 +37,10 @@ namespace DesignPatterns
             PadroesComportamentais.Iterator(); // Iterator
             PadroesComportamentais.Observer(); // Observer
             PadroesComportamentais.Strategy(); // Strategy
+            PadroesComportamentais.Command(); // Command
             */
 
-            PadroesComportamentais.Command(); // Command
+            PadroesComportamentais.State(); // State
         }
     }
 
@@ -315,6 +316,14 @@ namespace DesignPatterns
 
             controle.PressionarBotao("Power On"); // TV ligada
             controle.PressionarBotao("Power Off"); // TV desligada
+        }
+
+        public static void State()
+        {
+            MaquinaDeVendas maquina = new MaquinaDeVendas();
+            maquina.InserirPagamento(); // Saída: Moeda inserida, selecione o produto
+            maquina.SelecionarProduto(); // Saída: Produto selecionado! Dispensando o produto...
+            maquina.RetirarProduto(); // Saída: Produto retirado!
         }
     }
 }

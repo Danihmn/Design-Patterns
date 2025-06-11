@@ -262,4 +262,115 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // State----------------------------------------------------
+    #region Interface dos métodos do fluxo de venda
+    interface InterfaceEstado
+    {
+        // Delega que o fluxograma da máquina terá a parte de pagamento, seleção de produtos e retirada
+        void InserirPagamento(MaquinaDeVendas maquina);
+        void SelecionarProduto(MaquinaDeVendas maquina);
+        void RetirarProduto(MaquinaDeVendas maquina);
+    }
+    #endregion
+
+    // Implementações concretas das trocas de estado
+    #region Classe que muda o estado da máquina para uma nova venda
+    class AguardandoPagamento : InterfaceEstado
+    {
+        public void InserirPagamento(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Moeda inserida, selecione o produto");
+            maquina.DefinirEstado(new AguardandoSelecao()); // Muda o estado quando o pagamento for feito
+        }
+
+        public void SelecionarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Primeiro insira o pagamento");
+        }
+
+        public void RetirarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Primeiro insira o pagamento");
+        }
+    }
+    #endregion
+
+    #region Classe que muda o estado da máquina para selecionar o produto
+    class AguardandoSelecao : InterfaceEstado
+    {
+        public void InserirPagamento(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Pagamento já inserido, selecione o produto");
+        }
+
+        public void SelecionarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Produto selecionado! Dispensando o produto...");
+            maquina.DefinirEstado(new AguardandoRetirada()); // Muda o estado quando o produto for selecionado
+        }
+
+        public void RetirarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Primeiro selecione um produto");
+        }
+    }
+    #endregion
+
+    #region Classe que muda o estado do produto para uma nova venda novamente
+    class AguardandoRetirada : InterfaceEstado
+    {
+        public void InserirPagamento(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Aguarde, o produto está sendo dispensado");
+        }
+
+        public void SelecionarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Aguarde, o produto está sendo dispensado");
+        }
+
+        public void RetirarProduto(MaquinaDeVendas maquina)
+        {
+            Console.WriteLine("Produto retirado!");
+            maquina.DefinirEstado(new AguardandoPagamento()); // Volta para o estado inicial quando a venda for finalizada
+        }
+    }
+    #endregion
+
+    #region Classe da máquina
+    class MaquinaDeVendas
+    {
+        // Armazena a interface
+        private InterfaceEstado estado;
+
+        public MaquinaDeVendas()
+        {
+            this.estado = new AguardandoPagamento(); // Começa no estado inicial do fluxo
+        }
+
+        // Onde é definido o novo estado no fluxo
+        public void DefinirEstado(InterfaceEstado novoEstado)
+        {
+            estado = novoEstado;
+        }
+
+        #region Métodos da interface
+        public void InserirPagamento()
+        {
+            estado.InserirPagamento(this);
+        }
+
+        public void SelecionarProduto()
+        {
+            estado.SelecionarProduto(this);
+        }
+
+        public void RetirarProduto()
+        {
+            estado.RetirarProduto(this);
+        }
+        #endregion
+    }
+    #endregion
 }
