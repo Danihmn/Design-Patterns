@@ -38,9 +38,10 @@ namespace DesignPatterns
             PadroesComportamentais.Observer(); // Observer
             PadroesComportamentais.Strategy(); // Strategy
             PadroesComportamentais.Command(); // Command
+            PadroesComportamentais.State(); // State
             */
 
-            PadroesComportamentais.State(); // State
+            PadroesComportamentais.TemplateMethod(); // Template Method
         }
     }
 
@@ -324,6 +325,19 @@ namespace DesignPatterns
             maquina.InserirPagamento(); // Saída: Moeda inserida, selecione o produto
             maquina.SelecionarProduto(); // Saída: Produto selecionado! Dispensando o produto...
             maquina.RetirarProduto(); // Saída: Produto retirado!
+        }
+
+        public static void TemplateMethod()
+        {
+            Relatorios relatorio_comprasPorCliente = new ComprasPorCliente();
+            Relatorios relatorio_produtosVendidosPorPeriodo = new ProdutosVendidosPorPeriodo();
+
+            // Exibe
+            Console.WriteLine("Processando relatório de compras por cliente...");
+            relatorio_comprasPorCliente.ProcessarRelatorio();
+
+            Console.WriteLine("Processando relatório de produtos vendidos por período...");
+            relatorio_produtosVendidosPorPeriodo.ProcessarRelatorio();
         }
     }
 }

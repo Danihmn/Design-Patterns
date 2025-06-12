@@ -373,4 +373,57 @@ namespace PadroesComportamentais
         #endregion
     }
     #endregion
+
+    // Template Method----------------------------------------------------
+    abstract class Relatorios
+    {
+        public void ProcessarRelatorio()
+        {
+            // Chama todos os métodos do relatório
+            ConectarBanco();
+            BuscarDados();
+            GerarRelatorioPDF();
+            EnviarRelatorio();
+        }
+
+        #region Metodos padrao do processo de gerar relatorios
+        protected void ConectarBanco()
+        {
+            Console.WriteLine("Acesso ao banco de dados");
+        }
+
+        protected void GerarRelatorioPDF()
+        {
+            Console.WriteLine("Relatório PDF criado");
+        }
+
+        protected void EnviarRelatorio()
+        {
+            Console.WriteLine("Relatório PDF enviado por e-mail");
+        }
+
+        // Será implementado pois pode variar de acordo com a busca
+        protected abstract void BuscarDados();
+        #endregion
+    }
+
+    #region Implementacoes das variacoes de busca de dados
+    // Compras por cliente
+    class ComprasPorCliente : Relatorios
+    {
+        protected override void BuscarDados()
+        {
+            Console.WriteLine("Dados de compras por cliente encontrados");
+        }
+    }
+
+    // Produtos vendidos por período
+    class ProdutosVendidosPorPeriodo : Relatorios
+    {
+        protected override void BuscarDados()
+        {
+            Console.WriteLine("Dados de produtos vendidos por período encontrados");
+        }
+    }
+    #endregion
 }
