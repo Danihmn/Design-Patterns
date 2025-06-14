@@ -39,9 +39,10 @@ namespace DesignPatterns
             PadroesComportamentais.Strategy(); // Strategy
             PadroesComportamentais.Command(); // Command
             PadroesComportamentais.State(); // State
+            PadroesComportamentais.TemplateMethod(); // Template Method
             */
 
-            PadroesComportamentais.TemplateMethod(); // Template Method
+            PadroesComportamentais.ChainOfResponsibility();
         }
     }
 
@@ -332,12 +333,28 @@ namespace DesignPatterns
             Relatorios relatorio_comprasPorCliente = new ComprasPorCliente();
             Relatorios relatorio_produtosVendidosPorPeriodo = new ProdutosVendidosPorPeriodo();
 
-            // Exibe
+            // Exibe os diferentes relatórios
             Console.WriteLine("Processando relatório de compras por cliente...");
             relatorio_comprasPorCliente.ProcessarRelatorio();
 
             Console.WriteLine("Processando relatório de produtos vendidos por período...");
             relatorio_produtosVendidosPorPeriodo.ProcessarRelatorio();
+        }
+
+        public static void ChainOfResponsibility()
+        {
+            // Cria os três objetos de diferentes níveis
+            Suporte suporte1 = new SuporteNivel1();
+            Suporte suporte2 = new SuporteNivel2();
+            Suporte suporte3 = new SuporteNivel3();
+
+            // Encadeia os objetos
+            suporte1.PassarAoProximo(suporte2).PassarAoProximo(suporte3);
+
+            // Faz solicitação de suporte usando apenas o suporte1, se ele não for capaz, automaticamente passa para outro
+            suporte1.SolicitacaoDeSuporte(1); // Suporte de nível 1 atendeu ao problema
+            suporte1.SolicitacaoDeSuporte(2); // Suporte de nível 2 atendeu ao problema
+            suporte1.SolicitacaoDeSuporte(3); // Suporte de nível 3 atendeu ao problema
         }
     }
 }

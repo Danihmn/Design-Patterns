@@ -426,4 +426,69 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Chain of Responsibility----------------------------------------------------
+    #region Interface do suporte
+    interface ISuporte
+    {
+        ISuporte PassarAoProximo(ISuporte suporte); // Passa ao próximo manipulador
+        void SolicitacaoDeSuporte(int nivel); // Atende a solicitação
+    }
+    #endregion
+
+    #region Classe do suporte onde tem a logica de passar ao proximo ou executar o suporte
+    abstract class Suporte : ISuporte
+    {
+        private ISuporte _ProximoSuporte; // Armazena um manipulador
+
+        // Lógica de passar ao próximo manipulador
+        public ISuporte PassarAoProximo(ISuporte suporte)
+        {
+            _ProximoSuporte = suporte;
+            return suporte;
+        }
+
+        // Lógica de atender ao pedido de acordo com o nível do problema
+        public virtual void SolicitacaoDeSuporte(int nivel)
+        {
+            if (_ProximoSuporte != null)
+                _ProximoSuporte.SolicitacaoDeSuporte(nivel);
+        }
+    }
+    #endregion
+
+    #region Implementacoes concretas da classe de suporte
+    class SuporteNivel1 : Suporte
+    {
+        public override void SolicitacaoDeSuporte(int nivel)
+        {
+            if (nivel == 1)
+                Console.WriteLine("Suporte de nível 1 atendeu ao problema");
+            else
+                base.SolicitacaoDeSuporte(nivel);
+        }
+    }
+
+    class SuporteNivel2 : Suporte
+    {
+        public override void SolicitacaoDeSuporte(int nivel)
+        {
+            if (nivel == 2)
+                Console.WriteLine("Suporte de nível 2 atendeu ao problema");
+            else
+                base.SolicitacaoDeSuporte(nivel);
+        }
+    }
+
+    class SuporteNivel3 : Suporte
+    {
+        public override void SolicitacaoDeSuporte(int nivel)
+        {
+            if (nivel == 3)
+                Console.WriteLine("Suporte de nível 3 atendeu ao problema");
+            else
+                base.SolicitacaoDeSuporte(nivel);
+        }
+    }
+    #endregion
 }
