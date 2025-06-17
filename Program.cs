@@ -40,9 +40,10 @@ namespace DesignPatterns
             PadroesComportamentais.Command(); // Command
             PadroesComportamentais.State(); // State
             PadroesComportamentais.TemplateMethod(); // Template Method
+            PadroesComportamentais.ChainOfResponsibility(); // Chain of Responsibility
             */
 
-            PadroesComportamentais.ChainOfResponsibility();
+            PadroesComportamentais.Mediator();
         }
     }
 
@@ -355,6 +356,25 @@ namespace DesignPatterns
             suporte1.SolicitacaoDeSuporte(1); // Suporte de nível 1 atendeu ao problema
             suporte1.SolicitacaoDeSuporte(2); // Suporte de nível 2 atendeu ao problema
             suporte1.SolicitacaoDeSuporte(3); // Suporte de nível 3 atendeu ao problema
+        }
+
+        public static void Mediator()
+        {
+            IMediator chat = new Chat();
+
+            // Todos os usuários no mesmo chat mediados
+            Usuario usuario1 = new UsuarioConcreto(chat, "Usuário 1");
+            Usuario usuario2 = new UsuarioConcreto(chat, "Usuário 2");
+            Usuario usuario3 = new UsuarioConcreto(chat, "Usuário 3");
+
+            // Adiciona os usuários na lista de usuários
+            chat.AdicionarUsuario(usuario1);
+            chat.AdicionarUsuario(usuario2);
+            chat.AdicionarUsuario(usuario3);
+
+            // Envios
+            usuario3.EnviarMensagem("Olá usuários");
+            usuario1.EnviarMensagem("Sejam bem vindos");
         }
     }
 }

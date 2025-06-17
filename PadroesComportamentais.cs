@@ -491,4 +491,78 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Mediator----------------------------------------------------
+    #region Interfae do mediador, delega o que o chat mediador deverá implementar
+    interface IMediator
+    {
+        void EnviarMensagem(string mensagem, Usuario usuario);
+        void AdicionarUsuario(Usuario usuario);
+    }
+    #endregion
+
+    #region Mediador, define a logica de quem envia e quem recebe
+    class Chat : IMediator
+    {
+        private List<Usuario> _usuarios; // Armazena os usuários
+
+        public Chat()
+        {
+            _usuarios = new List<Usuario>(); // Inicializa a lista
+        }
+
+        // Método que apenas faz quem não enviou a mensagem recebê-la
+        public void EnviarMensagem(string mensagem, Usuario usuario)
+        {
+            foreach (var u in _usuarios)
+            {
+                // Único que não recebe é o passado no parâmetro, o resto da lista sim
+                if (u != usuario)
+                    u.ReceberMensagem(mensagem); // Chama o método apenas para aqueles que não sejam igual ao que enviou a mensagem
+            }
+        }
+
+        public void AdicionarUsuario(Usuario usuario)
+        {
+            _usuarios.Add(usuario); // Adiciona à lista
+        }
+    }
+    #endregion
+
+    #region Classe abstrata responsavel por armazenar e delegar o que cada usuario faz
+    abstract class Usuario
+    {
+        protected IMediator _mediador; // Armazena referência para a interface
+        protected string _nome;
+
+        public Usuario(IMediator mediador, string nome)
+        {
+            _mediador = mediador;
+            _nome = nome;
+        }
+
+        // Todos podem enviar e receber mensagens
+        public abstract void EnviarMensagem(string mensagem);
+        public abstract void ReceberMensagem(string mensagem);
+    }
+    #endregion
+
+    #region Classe implementadora da superclasse de usuarios
+    class UsuarioConcreto : Usuario
+    {
+        public UsuarioConcreto(IMediator mediador, string nome) : base(mediador, nome) { } // Herda o construtor da superclasse
+
+        public override void EnviarMensagem(string mensagem)
+        {
+            Console.WriteLine(_nome + " enviou " + mensagem);
+            _mediador.EnviarMensagem(mensagem, this); // Chama o método da classe do chat, passando seu próprio objeto no parâmetro
+        }
+
+        public override void ReceberMensagem(string mensagem)
+        {
+            // Só aparecerá para aqueles que não enviaram mensagem
+            Console.WriteLine(_nome + " recebeu " + mensagem);
+        }
+    }
+    #endregion
 }
