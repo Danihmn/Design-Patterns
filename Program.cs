@@ -41,9 +41,10 @@ namespace DesignPatterns
             PadroesComportamentais.State(); // State
             PadroesComportamentais.TemplateMethod(); // Template Method
             PadroesComportamentais.ChainOfResponsibility(); // Chain of Responsibility
+            PadroesComportamentais.Mediator(); // Mediator
             */
 
-            PadroesComportamentais.Mediator();
+            PadroesComportamentais.Memento();
         }
     }
 
@@ -375,6 +376,20 @@ namespace DesignPatterns
             // Envios
             usuario3.EnviarMensagem("Olá usuários");
             usuario1.EnviarMensagem("Sejam bem vindos");
+        }
+
+        public static void Memento()
+        {
+            EditorTexto editor = new EditorTexto();
+            Historico historico = new Historico();
+
+            editor.Texto = "Versão 1"; // Insere o texto
+            historico.Adicionar(editor.Salvar()); // Chama o método que retorna um objeto com o valor do texto e o armazena na lista de histórico
+
+            editor.Texto = "Versão 2";
+            historico.Adicionar(editor.Salvar());
+
+            historico.Desfazer(); // Volta para a versão anterior
         }
     }
 }

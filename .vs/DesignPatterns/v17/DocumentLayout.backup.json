@@ -22,7 +22,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
@@ -34,8 +34,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAFABAAAAAAAAAAAkwHsBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T13:40:23.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T13:40:23.363Z"
             },
             {
               "$type": "Document",
@@ -45,10 +44,14 @@
               "RelativeDocumentMoniker": "PadroesComportamentais.cs",
               "ToolTip": "C:\\Users\\danie\\Dev.NET\\Estudos\\DesignPatterns\\PadroesComportamentais.cs",
               "RelativeToolTip": "PadroesComportamentais.cs",
-              "ViewState": "AgIAABgCAAAAAAAAAAAIwDcCAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAQCAAAAAAAAAAAwwDcCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-07T00:45:38.648Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }

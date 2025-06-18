@@ -565,4 +565,51 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Memento----------------------------------------------------
+    #region Memento
+    class Memento
+    {
+        public string Estado { get; private set; } // Versão do texto
+
+        public Memento(string estado)
+        {
+            Estado = estado;
+        }
+    }
+    #endregion
+
+    #region Originator
+    class EditorTexto
+    {
+        public string Texto { get; set; } // Texto em si
+
+        public Memento Salvar()
+        {
+            return new Memento(Texto);
+        }
+
+        public void Restaurar(Memento memento)
+        {
+            Texto = memento.Estado;
+        }
+    }
+    #endregion
+
+    #region CareTaker
+    class Historico
+    {
+        private Stack<Memento> _historico = new Stack<Memento>();
+
+        public void Adicionar(Memento memento)
+        {
+            _historico.Push(memento);
+        }
+
+        public void Desfazer()
+        {
+            _historico.Pop(); // Tira o último elememento armazenado na pilha, volta para a anterior
+        }
+    }
+    #endregion
 }
