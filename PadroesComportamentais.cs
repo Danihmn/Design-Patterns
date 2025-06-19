@@ -711,4 +711,68 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Interpreter----------------------------------------------------
+    #region Metodo de interpretar que todas as expressoes terao
+    interface IExpressao
+    {
+        int Interpretar();
+    }
+    #endregion
+
+    #region Classe responsavel em instanciar novos numeros
+    class Numero : IExpressao
+    {
+        // Número que só pode ter um valor atribuído
+        readonly int _numero;
+
+        public Numero(int numero)
+        {
+            _numero = numero;
+        }
+
+        public int Interpretar()
+        {
+            return _numero; // Retorna o número instanciado
+        }
+    }
+    #endregion
+
+    #region Classes de operacoes
+    class Adicao : IExpressao
+    {
+        // Armazena expressões simples
+        private readonly IExpressao _expressaoEsquerda; // Antes do sinal +
+        private readonly IExpressao _expressaoDireita; // Depois do sinal +
+
+        public Adicao(IExpressao expressaoEsquerda, IExpressao expressaoDireita)
+        {
+            _expressaoEsquerda = expressaoEsquerda;
+            _expressaoDireita = expressaoDireita;
+        }
+
+        public int Interpretar()
+        {
+            return _expressaoEsquerda.Interpretar() + _expressaoDireita.Interpretar();
+        }
+    }
+
+    class Subtracao : IExpressao
+    {
+        // Armazena expressões simples
+        private readonly IExpressao _expressaoEsquerda; // Antes do sinal -
+        private readonly IExpressao _expressaoDireita; // Depois do sinal -
+
+        public Subtracao(IExpressao expressaoEsquerda, IExpressao expressaoDireita)
+        {
+            _expressaoEsquerda = expressaoEsquerda;
+            _expressaoDireita = expressaoDireita;
+        }
+
+        public int Interpretar()
+        {
+            return _expressaoEsquerda.Interpretar() - _expressaoDireita.Interpretar();
+        }
+    }
+    #endregion
 }

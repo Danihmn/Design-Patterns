@@ -43,9 +43,9 @@ namespace DesignPatterns
             PadroesComportamentais.ChainOfResponsibility(); // Chain of Responsibility
             PadroesComportamentais.Mediator(); // Mediator
             PadroesComportamentais.Memento(); // Memento
-            */
-
             PadroesComportamentais.Visitor(); // Visitor
+            PadroesComportamentais.Interpreter(); // Interpreter
+            */
         }
     }
 
@@ -411,6 +411,17 @@ namespace DesignPatterns
                 setor.Aceitar(dedetizacao);
                 setor.Aceitar(segurancaDoTrabalho);
             }
+        }
+
+        public static void Interpreter()
+        {
+            // (20 - 2) + (30 - 20)
+            IExpressao expressao = new Adicao(
+                new Subtracao(new Numero(20), new Numero(2)),
+                new Subtracao(new Numero(20), new Numero(20))
+            );
+
+            Console.WriteLine(expressao.Interpretar());
         }
     }
 }
