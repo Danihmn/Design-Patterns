@@ -42,9 +42,10 @@ namespace DesignPatterns
             PadroesComportamentais.TemplateMethod(); // Template Method
             PadroesComportamentais.ChainOfResponsibility(); // Chain of Responsibility
             PadroesComportamentais.Mediator(); // Mediator
+            PadroesComportamentais.Memento(); // Memento
             */
 
-            PadroesComportamentais.Memento();
+            PadroesComportamentais.Visitor(); // Visitor
         }
     }
 
@@ -390,6 +391,26 @@ namespace DesignPatterns
             historico.Adicionar(editor.Salvar());
 
             historico.Desfazer(); // Volta para a versão anterior
+        }
+
+        public static void Visitor()
+        {
+            List<ISetor> setores = new List<ISetor>();
+
+            // Adiciona cada setor na lista
+            setores.Add(new SetorFinanceiro());
+            setores.Add(new SetorFabrica());
+            setores.Add(new SetorTI());
+
+            IFiscal dedetizacao = new FiscalDedetizacao();
+            IFiscal segurancaDoTrabalho = new FiscalSegurancaDoTrabalho();
+
+            foreach (var setor in setores)
+            {
+                // A cada loop chama o método Aceitar
+                setor.Aceitar(dedetizacao);
+                setor.Aceitar(segurancaDoTrabalho);
+            }
         }
     }
 }

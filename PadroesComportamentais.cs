@@ -612,4 +612,103 @@ namespace PadroesComportamentais
         }
     }
     #endregion
+
+    // Visitor----------------------------------------------------
+    #region Metodos que todo o fiscal tem
+    interface IFiscal
+    {
+        void VisitarSetorFinanceiro(SetorFinanceiro financeiro);
+        void VisitarSetorFabricacao(SetorFabrica fabrica);
+        void VisitarSetorTI(SetorTI ti);
+    }
+    #endregion
+
+    #region Insercao de diversos fiscais de forma flexivel
+    class FiscalDedetizacao : IFiscal
+    {
+        public void VisitarSetorFinanceiro(SetorFinanceiro financeiro)
+        {
+            Console.WriteLine("Fiscal de dedetização visitou o setor: " + financeiro.NomeSetor());
+        }
+
+        public void VisitarSetorFabricacao(SetorFabrica fabrica)
+        {
+            Console.WriteLine("Fiscal de dedetização visitou o setor: " + fabrica.NomeSetor());
+        }
+
+        public void VisitarSetorTI(SetorTI ti)
+        {
+            Console.WriteLine("Fiscal de dedetização visitou o setor: " + ti.NomeSetor());
+        }
+    }
+
+    class FiscalSegurancaDoTrabalho : IFiscal
+    {
+        public void VisitarSetorFinanceiro(SetorFinanceiro financeiro)
+        {
+            Console.WriteLine("Fiscal de segurança do trabalho visitou o setor: " + financeiro.NomeSetor());
+        }
+
+        public void VisitarSetorFabricacao(SetorFabrica fabrica)
+        {
+            Console.WriteLine("Fiscal de segurança do trabalho visitou o setor: " + fabrica.NomeSetor());
+        }
+
+        public void VisitarSetorTI(SetorTI ti)
+        {
+            Console.WriteLine("Fiscal de segurança do trabalho visitou o setor: " + ti.NomeSetor());
+        }
+    }
+    #endregion
+
+    #region Metodos que todo o setor tem
+    interface ISetor
+    {
+        void Aceitar(IFiscal fiscal);
+    }
+    #endregion
+
+    #region Implementacao dos setores
+    class SetorFinanceiro : ISetor
+    {
+        public void Aceitar(IFiscal fiscal)
+        {
+            // Passa seu próprio objeto como parâmetro
+            fiscal.VisitarSetorFinanceiro(this);
+        }
+
+        public string NomeSetor()
+        {
+            return "Setor do financeiro";
+        }
+    }
+
+    class SetorFabrica : ISetor
+    {
+        public void Aceitar(IFiscal fiscal)
+        {
+            // Passa seu próprio objeto como parâmetro
+            fiscal.VisitarSetorFabricacao(this);
+        }
+
+        public string NomeSetor()
+        {
+            return "Setor de fabricação";
+        }
+    }
+
+    class SetorTI : ISetor
+    {
+        public void Aceitar(IFiscal fiscal)
+        {
+            // Passa seu próprio objeto como parâmetro
+            fiscal.VisitarSetorTI(this);
+        }
+
+        public string NomeSetor()
+        {
+            return "Setor de TI";
+        }
+    }
+    #endregion
 }
